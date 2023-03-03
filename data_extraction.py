@@ -6,7 +6,8 @@ class DataExtractor:
     # that help extract data from different data sources.
     # The methods contained will be fit to extract data from a particular data source, 
     # these sources will include CSV files, an API and an S3 bucket.
-
+    def __init__(self) -> None:
+        pass
     #step 5: Develop a method called read_rds_table 
     # which will extract the database table to a pandas DataFrame.
     # take in an instance of DatabaseConnector class 

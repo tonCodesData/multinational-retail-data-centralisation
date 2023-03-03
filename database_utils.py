@@ -28,3 +28,16 @@ class DatabaseConnector:
         DATABASE = creds['RDS_DATABASE']
         engine = create_engine(f"{DATABASE_TYPE}+{DBAPI}://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
         return engine
+
+    #step 4: Using the engine from init_db_engine 
+    # create a method list_db_tables to list all the tables in db
+    # so you know which tables you can extract data from. 
+    # Develop a method inside your DataExtractor class 
+    # to read the data from the RDS database.
+    def list_db_tables(self): 
+        engine  = self.init_db_engine()
+        # list all the tables
+        table_name_ls = inspect(engine).get_table_names()
+        return table_name_ls
+
+

@@ -10,8 +10,8 @@ class DatabaseConnector:
     # this will read the credentials yaml file 
     # and return a dictionary of the credentials.
     def read_db_creds(self, creds_filename):
-        file = open(creds_filename, 'r')
-        creds = yaml.safe_load(file)
+        with open(creds_filename) as file:
+            creds = yaml.safe_load(file)
         return creds
     
     # step3: Now create a method init_db_engine 

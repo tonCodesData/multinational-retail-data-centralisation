@@ -71,5 +71,3 @@ df.drop(['dt'], axis=1, inplace=True)
 
 # %% working with Unnamed:0 
 df.rename(columns={'Unnamed: 0': 'groups'}, inplace=True)
-# %%
-df.info()

@@ -23,11 +23,11 @@ table_name_ls = db_connector.list_db_tables(engine)
 # Use the read_rds_table method
 # to extract the table containing user data 
 # and return a pandas DataFrame.
-users = data_extractor.read_rds_table('legacy_users', engine)
-users_cleaned = data_cleaner.clean_user_data(users)
+user_data = data_extractor.read_rds_table('legacy_users', engine)
+user_clean_data = data_cleaner.clean_user_data(user_data)
 
 #upload to Sales_data
-db_connector.upload_to_db(users_cleaned, 'dim_users', db_connector.init_local_db_engine())
+db_connector.upload_to_db(user_clean_data, 'dim_users', db_connector.init_local_db_engine())
 
 #%%
 #importing from pdf and transforming to dfs

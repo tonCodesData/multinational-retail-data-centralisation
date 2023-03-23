@@ -35,10 +35,10 @@ class DataExtractor:
         return json_data['number_stores']        
 
     #extracts all stores and save them in pandas df
-    def retrieve_stores_data(self, num_stores_endpoint, header_dict):
-        response = req.get(num_stores_endpoint, headers = header_dict)
-        data = response.json()
-        return pd.DataFrame(data)
+    # def retrieve_stores_data(self, num_stores_endpoint, header_dict):
+    #     response = req.get(num_stores_endpoint, headers = header_dict)
+    #     data = response.json()
+    #     return pd.DataFrame(data)
 
     def retrieve_stores_data(self, retrieve_store_endpoint, number_of_stores, header_dict):
         stores_ls = []

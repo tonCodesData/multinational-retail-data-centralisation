@@ -33,10 +33,8 @@ db_connector.upload_to_db(user_clean_data, 'dim_users', db_connector.init_local_
 #importing from pdf and transforming to dfs
 card_df = data_extractor.retrieve_pdf_data("https://data-handling-public.s3.eu-west-1.amazonaws.com/card_details.pdf")
 #%%
-print(len(card_df))
-card_df_page_1 = card_df[0]
 #%%
-card_cleaned = data_cleaner.clean_card_data(card_df_page_1)
+card_cleaned = data_cleaner.clean_card_data(card_df)
 #%%
 db_connector.upload_to_db(card_cleaned, 'dim_card_details', db_connector.init_local_db_engine())
 

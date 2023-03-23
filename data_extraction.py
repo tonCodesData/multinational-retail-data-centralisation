@@ -24,7 +24,8 @@ class DataExtractor:
     #returns df.
     #extract all pages from the pdf using tabular-py python package, and return df
     def retrieve_pdf_data(self, link):
-        df = tb.read_pdf(link, stream=True, pages = 'all') #jana lagbe
+        ls = tb.read_pdf(link, multiple_tables=True, pages = 'all') #jana lagbe
+        df = pd.concat(ls)
         return df
     
     #returns number of stores to extract

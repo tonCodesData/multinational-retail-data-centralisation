@@ -15,16 +15,12 @@ df = pd.read_csv('card.csv')
 pd.set_option('display.max_rows', 1000) 
 pd.set_option('display.max_columns', 1000)
 pd.set_option('display.width', 1000)
-# %%
-# %%
 
 # %% drop null values
 df.dropna(inplace=True)
 
-
 # %% work with card_number 
 df['card_number'] = df['card_number'].astype('string')
-
 
 # %% clean card_provider
 df['card_provider'] = df['card_provider'].astype('string')
@@ -40,14 +36,12 @@ df['card_provider'] = df['card_provider'].astype('category')
 df.drop(['valid_provider'], axis=1, inplace=True) 
 
 
-
 # %% clean date_payment_confirmed
 set(df['date_payment_confirmed'])
 # %%
 df['date_payment_confirmed'] # just transform into datetime
 # %%
 df['date_payment_confirmed'] = pd.to_datetime(df['date_payment_confirmed'], errors='coerce', infer_datetime_format=True)
-# %%
 
 
 # %% work with expiry date
@@ -66,7 +60,6 @@ df['expiry_date'] = pd.to_datetime(df['dt']).dt.to_period('M')
 df['expiry_date']
 # %%
 df.drop(['dt'], axis=1, inplace=True)
-
 
 
 # %% working with Unnamed:0 

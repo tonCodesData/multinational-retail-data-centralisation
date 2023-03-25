@@ -104,6 +104,6 @@ df = pd.concat([ukaddress, usaddress, deaddress])
 # %%
 df.info()
 # %%
-df['index'].value_counts()
+df['Unnamed: 0'].value_counts()
 # %%
 df.head()

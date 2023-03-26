@@ -53,9 +53,9 @@ class DataExtractor:
         s3 = boto3.client('s3')
         bucket_name = s3_address.split('/')[2].split('.')[0]
         file_path_n_name = '/'.join(s3_address.split('/')[3:])
-        with open('date_needs_claning.json', 'wb') as date_json:
+        with open('date_needs_cleaning.json', 'wb') as date_json:
             s3.download_fileobj(bucket_name, file_path_n_name, date_json)
-        date_data = pd.read_json('date_needs_claning.json')
+        date_data = pd.read_json('date_needs_cleaning.json')
         date_df = pd.DataFrame(date_data)
         return date_df
     

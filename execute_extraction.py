@@ -70,11 +70,11 @@ db_connector.upload_to_db(cleaned_prod_df, 'dim_products', db_connector.init_loc
 
 # %%--------------------------------------------------------
 # M2Task7: Retrieve and clean orders table from AWS RDS
-#step1: get all table names
+#%%step1: get all table names
 print(table_name_ls)
-#step2: extract orders_table and convert into pd df
+#%%step2: extract orders_table and convert into pd df
 orders_df = data_extractor.read_rds_table('orders_table', engine)
-#step3: clean the orders_df
+#%%step3: clean the orders_df
 cleaned_orders_df = data_cleaner.clean_orders_data(orders_df)
 db_connector.upload_to_db(cleaned_orders_df, 'orders_table', db_connector.init_local_db_engine())
 

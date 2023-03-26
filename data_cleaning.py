@@ -53,54 +53,52 @@ class DataCleaning:
         df['date_payment_confirmed'] = pd.to_datetime(df['date_payment_confirmed'], errors='coerce', infer_datetime_format=True)
 
         # work with expiry date
-        df['dt'] = pd.to_datetime(df['expiry_date'], format="%m/%y")
+        df['expiry_date'] = pd.to_datetime(df['expiry_date'], format="%m/%y")
         # df['expiry_date'] = df['dt'].map(lambda x: x.strftime('%m/%y'))
-        df['expiry_date'] = pd.to_datetime(df['dt']).dt.to_period('M')
-        df.drop(['dt'], axis=1, inplace=True)
+        #df['expiry_date'] = pd.to_datetime(df['expiry_date']).dt.to_period('M')
+        #df.drop(['dt'], axis=1, inplace=True)
 
-        # working with Unnamed:0 
-        df.rename(columns={'Unnamed: 0': 'groups'}, inplace=True)
         return df
     
     def clean_store_data(self, df):         
-        # cleaning 'lat'
-        df = df[df['lat'].isnull()]
-        df = df.drop(['lat'], axis=1)
+        #%% cleaning 'lat'
+        df.drop(['lat'], axis=1, inplace=True)
 
-        # dropping null values
+        #%% dropping null values
         df.dropna(inplace=True)
 
-        # cleaning continent
+        #%% cleaning continent
         df['continent'] = df['continent'].replace({'eeEurope':'Europe', 'eeAmerica':'America'})
         df['continent'] = df['continent'].astype('category')
-
-        # cleaning latitude
+        #%%
+        df = df[df['continent'].apply(lambda x: x in ['America', 'Europe'])]
+        #%% cleaning latitude
         df['latitude']= df['latitude'].astype('float64')
         df['latitude'] = df['latitude'].round(4)
 
-        # cleaning country code
+        #%% cleaning country code
         df['country_code'] = df['country_code'].astype('category')
 
-        # cleaning store type
+        #%% cleaning store type
         df['store_type'] = df['store_type'].astype('category')
 
-        # cleaning opening date
+        #%% cleaning opening date
         df['opening_date'] = pd.to_datetime(df['opening_date'], infer_datetime_format=True, errors='coerce')
 
-        # cleaning staff members
+        #%% cleaning staff members
         df['staff_numbers'] = pd.to_numeric(df['staff_numbers'], errors='coerce').astype('Int64')
 
-        # cleaning store_code
+        #%% cleaning store_code
         df['store_code'] = df['store_code'].astype('string')
 
-        # cleaning locality
+        #%% cleaning locality
         df['locality'] = df['locality'].astype('string')
 
-        # cleaning longitude
+        #%% cleaning longitude
         df['longitude']= df['longitude'].astype('float64')
         df['longitude'] = df['longitude'].round(4)
 
-        # cleaning address
+        #%% cleaning address
         ukaddress = df[df['country_code']=='GB']
         ukaddress['address'] = ukaddress['address'].apply(lambda x: x.split(',')[0])
         ukaddress['post_code'] = ukaddress['address'].apply(lambda x: x.split('\n').pop(-1))
@@ -109,6 +107,7 @@ class DataCleaning:
         ukaddress['house_road'] = ukaddress['house_road'].str.title()
         ukaddress.drop(['address'], axis=1, inplace=True)
 
+        #%%
         usaddress = df[df['country_code']=='US']
         usaddress['house_road'] = usaddress['address'].apply(lambda x: x.split('\n').pop(0))
         usaddress['city_zip_local'] = usaddress['address'].apply(lambda x: x.split('\n').pop(-1))
@@ -119,6 +118,7 @@ class DataCleaning:
         usaddress.rename(columns={'zip':'post_code'}, inplace=True)
         usaddress.drop(['address'], axis=1, inplace=True)
 
+        #%%
         deaddress = df[df['country_code']=='DE']
         deaddress['house_road'] = deaddress['address'].apply(lambda x: x.split('\n').pop(0))
         deaddress['city_zip_local'] = deaddress['address'].apply(lambda x: x.split('\n').pop(-1))
@@ -127,9 +127,10 @@ class DataCleaning:
         deaddress.drop(['city_zip_local'], axis=1, inplace=True)
         deaddress.drop(['address'], axis=1, inplace=True)
 
+        #%%
         df = pd.concat([ukaddress, usaddress, deaddress])
-
-        df['Unnamed: 0'].value_counts()
+        # %%
+        df.sort_values(by='index', inplace=True)
         return df
     
     def convert_product_weights(self, df):
@@ -179,7 +180,7 @@ class DataCleaning:
     #m2t7
     #step3: 
     def clean_orders_data(self, df):
-        df.drop(['Unnamed: 0', 'level_0', 'first_name', 'last_name', '1'], axis=1, inplace=True)
+        df.drop(['level_0', 'first_name', 'last_name', '1'], axis=1, inplace=True)
         df['product_code'] = df['product_code'].str.upper()
         return df
 

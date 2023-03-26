@@ -63,9 +63,9 @@ class DataExtractor:
         s3 = boto3.client('s3')
         bucket_name = s3_address.split('/')[2]
         file_path_n_name = '/'.join(s3_address.split('/')[3:])
-        with open('products_need_claning.csv', 'wb') as prod_csv:
+        with open('products.csv', 'wb') as prod_csv:
             s3.download_fileobj(bucket_name, file_path_n_name, prod_csv)
-        products_data = pd.read_csv('products_need_claning.csv')
+        products_data = pd.read_csv('products.csv')
         products_df = pd.DataFrame(products_data)
         return products_df
     

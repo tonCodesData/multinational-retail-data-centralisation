@@ -1,12 +1,14 @@
 #%%
 import pandas as pd
 df = pd.read_csv('products.csv')
-df.dropna(inplace=True)
+
 pd.set_option('display.max_rows', 1000) 
 pd.set_option('display.max_columns', 1000)
 pd.set_option('display.width', 1000)
 
-# %% cleaning weight
+
+# cleaning weight
+df.dropna(inplace=True)
 df['weights'] = df['weight'].str.replace('([A-Za-z]+)', '')
 df['units'] = df['weight'].str.extract('([A-Za-z]+)')
 
@@ -33,3 +35,15 @@ df.drop(['weights'], axis=1, inplace=True)
 df.rename(columns={'weight':'weight_kg'}, inplace=True)
 df.drop(['units'], axis=1, inplace=True)
 
+# cleaning other columns
+df['product_code'] = df['product_code'].str.upper()
+df['date_added'] = pd.to_datetime(df['date_added'], infer_datetime_format=True, errors='coerce')
+df['product_code'] = df['product_code'].astype('string')
+df['removed'] = df['removed'].astype('string')
+df['uuid'] = df['uuid'].astype('string')
+df['ean_len'] = df['EAN'].apply(lambda x: len(x))
+df['EAN'] = df['EAN'].astype('int64')
+df['category']= df['category'].astype('category')
+df['product_price']=df['product_price'].str.strip('£')
+df['product_price'] = df['product_price'].astype('float64')
+df['product_name'] = df['product_name'].astype('string')

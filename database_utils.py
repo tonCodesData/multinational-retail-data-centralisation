@@ -4,7 +4,7 @@ from sqlalchemy import inspect
 import pandas as pd
 
 class DatabaseConnector:
-    # will be used to connect with and upload data to the database
+    # this class is used to connect with and upload data to the database
     def __init__(self) -> None:
         pass
 

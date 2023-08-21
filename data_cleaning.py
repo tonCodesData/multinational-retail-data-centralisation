@@ -1,7 +1,7 @@
 import pandas as pd
 
+# clean data of each data sources
 class DataCleaning:
-    # clean data of each data sources
     def __init__(self) -> None:
         pass
 

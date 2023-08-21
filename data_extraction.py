@@ -7,10 +7,7 @@ import requests as req
 import boto3
 
 class DataExtractor:
-    # This class will work as a utility class, in it you will be creating methods 
-    # that help extract data from different data sources.
-    # The methods contained will be fit to extract data from a particular data source, 
-    # these sources will include CSV files, an API and an S3 bucket.
+    # This class works as a utility class by creating methods to help extract data from different data sources.
     def __init__(self) -> None:
         pass
     #step 5: Develop a method called read_rds_table 

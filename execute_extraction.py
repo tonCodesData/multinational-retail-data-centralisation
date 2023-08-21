@@ -31,6 +31,8 @@ card_df = data_extractor.retrieve_pdf_data("https://data-handling-public.s3.eu-w
 card_cleaned = data_cleaner.clean_card_data(card_df)
 db_connector.upload_to_db(card_cleaned, 'dim_card_details', db_connector.init_local_db_engine())
 
+
+#------------------------------------------------------------------------------
 #%% extract from api and clean details of each store, and upload
 header_dict = {'x-api-key':'yFBQbwXe9J3sd6zWVAMrK6lcxxr0q1lr2PT6DDMX'}
 num_stores_endpoint = 'https://aqj7u5id95.execute-api.eu-west-1.amazonaws.com/prod/number_stores'

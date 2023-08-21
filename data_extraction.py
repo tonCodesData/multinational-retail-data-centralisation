@@ -6,22 +6,20 @@ import tabula as tb
 import requests as req
 import boto3
 
+# This class works as a utility class by creating methods to help extract data from different data sources.
 class DataExtractor:
-    # This class works as a utility class by creating methods to help extract data from different data sources.
     def __init__(self) -> None:
         pass
-    #step 5: Develop a method called read_rds_table 
-    # which will extract the database table to a pandas DataFrame.
-    # take in an instance of DatabaseConnector class 
-    # and the table name as an argument and return a pandas Df
+
+    # read_rds_table() extracts the database table to a pandas DataFrame.
+    # It takes in an instance of DatabaseConnector class and the table name as an argument and return a pandas Df
     def read_rds_table(self, table_name, engine):
         users = pd.read_sql_query(f"select * from {table_name}", engine)
         return users
     
-    #returns df.
-    #extract all pages from the pdf using tabular-py python package, and return df
+    # retrieve_pdf_data() method extracts all pages from a pdf using tabular-py python package, and returns df.
     def retrieve_pdf_data(self, link):
-        ls = tb.read_pdf(link, multiple_tables=True, pages = 'all') #jana lagbe
+        ls = tb.read_pdf(link, multiple_tables=True, pages = 'all')
         df = pd.concat(ls)
         return df
     

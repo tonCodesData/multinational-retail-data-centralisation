@@ -88,6 +88,8 @@ Create data_cleaning.py script containing DataCleaning class to clean data of ea
     -- DatabaseConnector
         - upload_to_db(DataCleaning.clean_date_data) --> store data in sales_data as table dim_date_times
 
+NEW LINE CHECK
+
 ----------------------------------------------------------------------------------------------------------
 
 

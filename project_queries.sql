@@ -1,12 +1,3 @@
-
-SELECT * FROM orders LIMIT 10;
-SELECT * FROM cards LIMIT 10;
-SELECT * FROM dates LIMIT 10;
-SELECT * FROM products LIMIT 10;
-SELECT * FROM stores LIMIT 10;
-SELECT * FROM users LIMIT 10;
-
-DROP TABLE stores;
 --------------ORDERS-------------------
 
 --- date_uuid recast -----

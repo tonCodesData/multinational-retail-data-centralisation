@@ -10,9 +10,21 @@ And so, my first goal was to produce a system that stores the current company da
 
 - Create data_extraction.py script containing DataExtractor class. This works as a utility class by creating methods to help extract data from different data sources.
 
-Create database_utils.py script containing DatabaseConnector class. This class is used to connect with and upload data to the database
+- Create database_utils.py script containing DatabaseConnector class. This class is used to connect with and upload data to the database
 
-Create data_cleaning.py script containing DataCleaning class to clean data of each data sources.
+- Create data_cleaning.py script containing DataCleaning class to clean data of each data sources.
+
+
+| data regarding      | stored in     | 
+| --------------------| --------------|
+| historical user data| AWS RDS       | 
+| users card details  | AWS S3 bucket |
+| store data          | API           |
+| prodyct information | AWS S3 bucket |
+| orders              | AWS RDS       |
+| sales               | AWS S3 bucket |
+
+
 
 ##### data:
 - historial data of users --> AWS RDS database in cloud

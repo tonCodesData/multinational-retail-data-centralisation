@@ -16,7 +16,7 @@ And so, my first goal was to produce a system that stores the current company da
 
 
 | data regarding      | stored in     | 
-| --------------------| --------------|
+| :-------------------| :------------:|
 | historical user data| AWS RDS       | 
 | users card details  | AWS S3 bucket |
 | store data          | API           |

@@ -15,14 +15,14 @@ And so, my first goal was to produce a system that stores the current company da
 - Create data_cleaning.py script containing DataCleaning class to clean data of each data sources.
 
 
-| data regarding      | stored in     | 
-| :-------------------| :------------:|
-| historical user data| AWS RDS       | 
-| users card details  | AWS S3 bucket |
-| store data          | API           |
-| prodyct information | AWS S3 bucket |
-| orders              | AWS RDS       |
-| sales               | AWS S3 bucket |
+| data regarding      | stored in     | file type |
+| :-------------------| :------------ |:----------|
+| historical user data| AWS RDS       |           |
+| users card details  | AWS S3 bucket | PDF       |
+| store data          | API           |           |
+| product information | AWS S3 bucket | CSV       |
+| orders              | AWS RDS       |           |
+| sales               | AWS S3 bucket | JSON      | 
 
 
 
@@ -99,8 +99,6 @@ And so, my first goal was to produce a system that stores the current company da
         - clean_events_date
     -- DatabaseConnector
         - upload_to_db(DataCleaning.clean_date_data) --> store data in sales_data as table dim_date_times
-
-NEW LINE CHECK
 
 ----------------------------------------------------------------------------------------------------------
 

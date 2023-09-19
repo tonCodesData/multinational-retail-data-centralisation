@@ -31,9 +31,6 @@ class DataCleaning:
 
         # work with expiry date
         df['expiry_date'] = pd.to_datetime(df['expiry_date'], format="%m/%y")
-        # df['expiry_date'] = df['dt'].map(lambda x: x.strftime('%m/%y'))
-        #df['expiry_date'] = pd.to_datetime(df['expiry_date']).dt.to_period('M')
-        #df.drop(['dt'], axis=1, inplace=True)
 
         return df    
 
@@ -67,57 +64,21 @@ class DataCleaning:
         # cleaning locality
         df['locality'] = df['locality'].astype('string')
 
-        # # cleaning longitude
-        # df['longitude']= df['longitude'].astype('float64', errors='ignore')
-        # df['longitude'] = df['longitude'].round(4)
-
-        # # cleaning address
-        # ukaddress = df[df['country_code']=='GB']
-        # ukaddress['address'] = ukaddress['address'].apply(lambda x: x.split(',')[0])
-        # ukaddress['post_code'] = ukaddress['address'].apply(lambda x: x.split('\n').pop(-1))
-        # ukaddress['city'] = ukaddress['address'].apply(lambda x: x.split('\n').pop(-2))
-        # ukaddress['house_road'] = ukaddress['address'].apply(lambda x: x.split('\n')[0]+ ', ' +x.split('\n').pop(1))
-        # ukaddress['house_road'] = ukaddress['house_road'].str.title()
-        # ukaddress.drop(['address'], axis=1, inplace=True)
-
-        # usaddress = df[df['country_code']=='US']
-        # usaddress['house_road'] = usaddress['address'].apply(lambda x: x.split('\n').pop(0))
-        # usaddress['city_zip_local'] = usaddress['address'].apply(lambda x: x.split('\n').pop(-1))
-        # usaddress['city'] = usaddress['city_zip_local'].apply(lambda x: x.split(',')[0])
-        # usaddress['zip'] = usaddress['city_zip_local'].apply(lambda x: x.split(',')[1])
-        # usaddress['house_road'] = usaddress['house_road'].str.title()
-        # usaddress.drop(['city_zip_local'], axis=1, inplace=True)
-        # usaddress.rename(columns={'zip':'post_code'}, inplace=True)
-        # usaddress.drop(['address'], axis=1, inplace=True)
-
-        # deaddress = df[df['country_code']=='DE']
-        # deaddress['house_road'] = deaddress['address'].apply(lambda x: x.split('\n').pop(0))
-        # deaddress['city_zip_local'] = deaddress['address'].apply(lambda x: x.split('\n').pop(-1))
-        # deaddress['city'] = deaddress['city_zip_local'].apply(lambda x: x.split(',')[0].split(' ')[-1])
-        # deaddress['post_code'] = deaddress['city_zip_local'].apply(lambda x: x.split(',')[0].split(' ')[0])
-        # deaddress.drop(['city_zip_local'], axis=1, inplace=True)
-        # deaddress.drop(['address'], axis=1, inplace=True)
-
-        # df = pd.concat([ukaddress, usaddress, deaddress])
-
         return df
 
 
     def clean_user_data(self, df):        
         # look for NULL values
-        #%%
         # sort_values
         df.sort_values(by=['index'], inplace=True)
         df.drop(['index'], axis=1, inplace=True)
-        #%%
         df.rename(columns={'Unnamed: 0':'id'}, inplace=True)
-        #%%
         df.dropna(inplace=True)
 
         df['date_of_birth'] = pd.to_datetime(df['date_of_birth'], errors='coerce', infer_datetime_format=True)
         df['join_date'] = pd.to_datetime(df['join_date'], errors='coerce', infer_datetime_format=True)
 
-        ## make all names titled
+        # make all names titled
         df['last_name'] = df['last_name'].astype('string')
         df['last_name'] = df['last_name'].apply(lambda x: x.title())
         # rows filled with wrong information
@@ -184,7 +145,6 @@ class DataCleaning:
         df['product_price'] = df['product_price'].astype('float64')
         df['product_name'] = df['product_name'].astype('string')
         return df
-    
     
     
     def clean_events_date(self, df):

@@ -11,17 +11,17 @@ And so, my first goal was to produce a system that stores the current company da
 ## data storage and file types
 
 |serial| data regarding      | stored in     | file type |
-|1| :-------------------| :------------ |:----------|
-|2| historical user data| AWS RDS       |           |
-|3| users card details  | AWS S3 bucket | PDF       |
-|4| store data          | API           |           |
-|5| product information | AWS S3 bucket | CSV       |
-|6| orders              | AWS RDS       |           |
-|7| sales               | AWS S3 bucket | JSON      | 
+|:-----| :-------------------| :------------ |:----------|
+|1     | historical user data| AWS RDS       |           |
+|2     | users card details  | AWS S3 bucket | PDF       |
+|3     | store data          | API           |           |
+|4     | product information | AWS S3 bucket | CSV       |
+|5     | orders              | AWS RDS       |           |
+|6     | sales               | AWS S3 bucket | JSON      | 
 
 ## File description
 
-|File | Descroption |
+|File | Description |
 |-----|-------------|
 |data_extraction.py| contain DataExtractor class. This works as a utility class by creating methods to help extract data from different data sources |
 |data_cleaning.py| contain DataCleaning class to clean data of each data sources |

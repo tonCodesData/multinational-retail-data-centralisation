@@ -8,7 +8,7 @@ And so, my first goal was to produce a system that stores the current company da
 - Python (pandas, tabula, requests, boto3, sqlalchemy)
 - PostgreSQL (psql client, SQL Tools in VS Code)
 
-## data storage and file types
+## Data storage and File types
 
 |serial| data regarding      | stored in     | file type |
 |:-----| :-------------------| :------------ |:----------|
@@ -27,83 +27,9 @@ And so, my first goal was to produce a system that stores the current company da
 |data_cleaning.py| contain DataCleaning class to clean data of each data sources |
 |database_utils.py| contain DatabaseConnector class. This class is used to connect with and upload data to the database |
 
+## Extract, Transform and Load(ETL):
+In the etl_execution.py file, for each of the 6 information types(user, card, store, product, orders, and sales), the three different classes DataExtractor, DataCleaning, and DatabaseConnector are initialised. Then classses, as discussed previously, contain methods to create connection to source storage and extract data of each information type from different sources, clean the extracted data, and finally create connection to PostgreSQL server to load the cleaned data into sql database. 
 
-## Extract and clean data from data sources:
-
-##### data:
-- historial data of users --> AWS RDS database in cloud
-    -- DatabaseConnector
-        - db_creds.yaml
-        - read_db_creds(db_creds.yaml) --> return dict of creds
-        - init_db_engine(read_db_creds(db_creds.yaml)) --> return sqlalchemy db engine
-        - list_db_tables(init_db_engine(read_db_creds(db_creds.yaml))) --> list all tables in db
-    -- DataExtractor
-        DatabaseConnector.list_db_tables --> get user table name
-        - read_rds_table(user table name) --> pd df
-    -- DataCleaning
-        - clean_user_data(DataExtractor.read_rds_table) --> pd df
-    -- DatabaseConnector
-        - upload_to_db(DataCleaning.clean_user_data) --> store data in sales_data as table dim_users
-
-- user's card details --> PDF doc in AWS S3 bucket
-    ** tabula-py needs to be installed
-    -- DataExtractor
-        - retrieve_pdf_data(pdf link) --> pd df
-    -- DataCleaning
-        - clean_card_data(DataExtractor.retrieve_pdf_data) --> pd df
-    -- DatabaseConnector
-        - upload_to_db(DataCleaning.clean_card_data) --> store data in sales_data as table dim_card_details
-
-- each store's data --> using API
-    This API has two GET-methods(endpoints):  
-        1. num_of_store_endpoint: https://aqj7u5id95.execute-api.eu-west-1.amazonaws.com/prod/number_stores
-        --> return numer of stores
-        2. a_store_endpoint: https://aqj7u5id95.execute-api.eu-west-1.amazonaws.com/prod/store_details/{store_number} 
-        --> retrieve a store
-
-    There is a x-api-key with the value yFBQbwXe9J3sd6zWVAMrK6lcxxr0q1lr2PT6DDMX. This gets saved in a dictionary. This is included in the list_number_of_stores method to connect to the API.  
-
-    -- DataExtractor
-        - list_number_of_stores(num_of_store_endpoint, x-api-key) --> returns number of stores to extract
-        - retrieve_stores_data(a_store_endpoint) --> retrieve all stores from API --> save as pd df
-    -- DataCleaning
-        - clean_store_data(DataExtractor.retrieve_stores_data) --> pd df
-    -- DatabaseConnector
-        - upload_to_db(DataCleaning.clean_card_data) --> store data in sales_data as table dim_store_details
-
-- information for each product of company --> CSV format in AWS S3 bucket
-    ** download and extract info --> using boto3 package --> return a pd df
-    S3 address:- s3://data-handling-public/products.csv
-    -- DataExtractor
-        - extract_from_s3(S3 address) --> return pandas DataFrame.
-        note- login to AWS CLI before retrieving
-    -- DataCleaning
-        - convert_product_weights
-        - clean_products_data
-    -- DatabaseConnector
-        - upload_to_db(DataCleaning.clean_products_data) --> store data in sales_data as table dim_products
-
-- orders table --> AWS RDS
-    -- DataExtractor
-        DatabaseConnector.list_db_tables --> get orders table name
-        - read_rds_table(orders table name) --> pd df
-    -- DataCleaning
-        - clean_orders_data(DataExtractor.read_rds_table) --> pd df
-    -- DatabaseConnector
-        - upload_to_db(DataCleaning.clean_orders_data) --> store data in sales_data as table orders_table
-
-- sale date --> JSON file in S3
-    ** download and extract info --> using boto3 package --> return a pd df
-    S3 address:- https://data-handling-public.s3.eu-west-1.amazonaws.com/date_details.json
-    
-    -- DataExtractor
-        - extract_from_s3_zone(self, s3_address) --> return pandas DataFrame
-        note- login to AWS CLI before retrieving
-    -- DataCleaning
-        - clean_events_date
-    -- DatabaseConnector
-        - upload_to_db(DataCleaning.clean_date_data) --> store data in sales_data as table dim_date_times
-
-----------------------------------------------------------------------------------------------------------
+## Create a star based schema for efficient data query:
 
 

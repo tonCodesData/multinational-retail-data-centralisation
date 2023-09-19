@@ -1,30 +1,34 @@
-# Title: Multinational Retail Data Centralisation
+# Multinational Retail Data Centralisation
 
-### Brief Description: 
 In this project, I assume the role of a Data Analyst working for a multinational company that sells various goods across the globe. Their sales data was spread across many different data sources making it not easily accessible or analysable by current members of the team. In an effort to become more data-driven, it is imperative to make its sales data accessible from one centralised location. 
 
 And so, my first goal was to produce a system that stores the current company data in a database so that it's accessed from one centralised location and acts as a single source of truth for sales data. Then I queried the database to get up-to-date metrics for the business.
 
+## Tools and dependencies
+- Python (pandas, tabula, requests, boto3, sqlalchemy)
+- PostgreSQL (psql client, SQL Tools in VS Code)
 
-### Extract and clean data from data sources:
+## data storage and file types
 
-- Create data_extraction.py script containing DataExtractor class. This works as a utility class by creating methods to help extract data from different data sources.
+|serial| data regarding      | stored in     | file type |
+|1| :-------------------| :------------ |:----------|
+|2| historical user data| AWS RDS       |           |
+|3| users card details  | AWS S3 bucket | PDF       |
+|4| store data          | API           |           |
+|5| product information | AWS S3 bucket | CSV       |
+|6| orders              | AWS RDS       |           |
+|7| sales               | AWS S3 bucket | JSON      | 
 
-- Create database_utils.py script containing DatabaseConnector class. This class is used to connect with and upload data to the database
+## File description
 
-- Create data_cleaning.py script containing DataCleaning class to clean data of each data sources.
-
-
-| data regarding      | stored in     | file type |
-| :-------------------| :------------ |:----------|
-| historical user data| AWS RDS       |           |
-| users card details  | AWS S3 bucket | PDF       |
-| store data          | API           |           |
-| product information | AWS S3 bucket | CSV       |
-| orders              | AWS RDS       |           |
-| sales               | AWS S3 bucket | JSON      | 
+|File | Descroption |
+|-----|-------------|
+|data_extraction.py| contain DataExtractor class. This works as a utility class by creating methods to help extract data from different data sources |
+|data_cleaning.py| contain DataCleaning class to clean data of each data sources |
+|database_utils.py| contain DatabaseConnector class. This class is used to connect with and upload data to the database |
 
 
+## Extract and clean data from data sources:
 
 ##### data:
 - historial data of users --> AWS RDS database in cloud

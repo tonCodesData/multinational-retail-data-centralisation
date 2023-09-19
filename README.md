@@ -31,5 +31,19 @@ And so, my first goal was to produce a system that stores the current company da
 In the etl_execution.py file, for each of the 6 information types(user, card, store, product, orders, and sales), the three different classes DataExtractor, DataCleaning, and DatabaseConnector are initialised. Then classses, as discussed previously, contain methods to create connection to source storage and extract data of each information type from different sources, clean the extracted data, and finally create connection to PostgreSQL server to load the cleaned data into sql database. 
 
 ## Create a star based schema for efficient data query:
+table_alter_update.sql file alters column types to create uniformed column types accross the six tables. This file also contains script that updates the products table with new column weight_category. 
+Next, we assign primary key constraint to appropriate columns of all tables except orders table and add foreign keys to orders table to create a star-shaped schema. 
+
+## Query the database for getting insights: 
+At this point, the database is ready to be queried. Here are the queries I performed. 
+
+```
+--1. how many stores does the business have and in which countries?
+SELECT country_code, COUNT(country_code) as total_no_stores
+FROM stores
+GROUP BY 1
+ORDER BY 2 DESC; 
+```
+
 
 

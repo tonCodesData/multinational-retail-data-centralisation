@@ -37,7 +37,7 @@ Next, we assign primary key constraint to appropriate columns of all tables exce
 ## Query the database for getting insights: 
 At this point, the database is ready to be queried. Here are the queries I performed. 
 
-1. how many stores does the business have and in which countries?
+**1. How many stores does the business have and in which countries?**
 ```
 SELECT country_code, COUNT(country_code) as total_no_stores
 FROM stores
@@ -46,7 +46,8 @@ ORDER BY 2 DESC;
 ```
 <img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/1.JPG">
 
-2. which locations has the most sotres?
+
+**2. which locations has the most sotres?**
 ```
 SELECT locality, COUNT(locality) AS total_no_stores
 FROM stores
@@ -56,7 +57,8 @@ LIMIT 7;
 ```
 <img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/2.JPG">
 
-3. which months produce the average highest cost of sales typically?
+
+**3. which months produce the average highest cost of sales typically?**
 ```
 WITH cte AS(
     SELECT o.product_code, o.product_quantity, d.month
@@ -73,8 +75,8 @@ ORDER BY 2 DESC;
 ```
 <img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/3.JPG">
 
-4. how many sales are coming from online?
 
+**4. how many sales are coming from online?**
 ```
 WITH cte AS (
 	SELECT 
@@ -96,8 +98,8 @@ GROUP BY 3;
 ```
 <img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/4.JPG">
 
-5. what % of sale come through each type of store
 
+**5. What % of sale come through each type of store**
 ```
 WITH cte1 AS (
     SELECT 
@@ -127,8 +129,8 @@ ORDER BY 2 DESC;
 ```
 <img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/5.JPG">
 
-6. which month in each year produced the highest cost of sales
 
+**6. Which month in each year produced the highest cost of sales?**
 ```
 WITH cte1 AS(
     SELECT o.product_code, o.product_quantity, d.month, d.year
@@ -160,7 +162,8 @@ ORDER BY 1 DESC;
 ```
 <img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/6.JPG">
 
-7. what is the staff headcount?
+
+**7. What is the staff headcount?**
 ```
 SELECT 
 	SUM(staff_numbers) AS total_staff_numbers,
@@ -171,8 +174,8 @@ ORDER BY 1 DESC;
 ```
 <img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/7.JPG">
 
-8. Which german store type is selling the most?
 
+**8. Which german store type is selling the most?**
 ```
 WITH cte AS(
     SELECT o.product_code, o.product_quantity, s.store_type, s.country_code

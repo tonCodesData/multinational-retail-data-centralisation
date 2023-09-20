@@ -54,7 +54,7 @@ GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 7;
 ```
-<img src="D:\project_dir\multinational-retail-data-centralisation\sql-queries\2.JPG">
+<img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/2.JPG">
 
 3. which months produce the average highest cost of sales typically?
 ```
@@ -71,7 +71,7 @@ JOIN cte
 GROUP BY 1
 ORDER BY 2 DESC;
 ```
-<img src="D:\project_dir\multinational-retail-data-centralisation\sql-queries\3.JPG">
+<img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/3.JPG">
 
 4. how many sales are coming from online?
 
@@ -94,7 +94,7 @@ SELECT
 FROM cte
 GROUP BY 3;
 ```
-<img src="D:\project_dir\multinational-retail-data-centralisation\sql-queries\4.JPG">
+<img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/4.JPG">
 
 5. what % of sale come through each type of store
 
@@ -125,7 +125,7 @@ SELECT
 FROM cte2, cte3
 ORDER BY 2 DESC;
 ```
-<img src="D:\project_dir\multinational-retail-data-centralisation\sql-queries\5.JPG">
+<img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/5.JPG">
 
 6. which month in each year produced the highest cost of sales
 
@@ -158,7 +158,7 @@ SELECT
 FROM cte3
 ORDER BY 1 DESC;
 ```
-<img src="D:\project_dir\multinational-retail-data-centralisation\sql-queries\6.JPG">
+<img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/6.JPG">
 
 7. what is the staff headcount?
 ```
@@ -169,7 +169,7 @@ FROM stores
 GROUP BY 2
 ORDER BY 1 DESC;
 ```
-<img src="D:\project_dir\multinational-retail-data-centralisation\sql-queries\7.JPG">
+<img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/7.JPG">
 
 8. Which german store type is selling the most?
 
@@ -191,4 +191,4 @@ JOIN cte
 GROUP BY 1, 3
 ORDER BY 2;
 ```
-<img src="D:\project_dir\multinational-retail-data-centralisation\sql-queries\8.JPG">
+<img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/8.JPG">

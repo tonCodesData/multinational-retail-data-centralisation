@@ -44,7 +44,7 @@ FROM stores
 GROUP BY 1
 ORDER BY 2 DESC; 
 ```
-<img src="D:\project_dir\multinational-retail-data-centralisation\sql-queries\1.JPG">
+<img src="https://github.com/tonCodesData/multinational-retail-data-centralisation/blob/main/sql-queries/1.JPG">
 
 2. which locations has the most sotres?
 ```
